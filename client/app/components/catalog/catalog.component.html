@@ -1,0 +1,73 @@
+<div class="options" (window:resize)="onResize()">
+  <form>
+    <div class="checkbox">
+      <div class="box" *ngFor="let box of products">
+        <input type="checkbox" id="{{box[0].section}}" name="{{box[0].section}}" [(ngModel)]="box[0].visibility"(ngModelChange)="showButton()">
+        <label [attr.for]="box[0].section" onmousedown="return false">{{box[0].section | uppercase}}</label>
+      </div>
+    </div>
+    <button type="button" (click)="seeAllProducts()" *ngIf="button">SEE ALL PRODUCTS</button>
+  </form>
+</div><!--class="options"  -->
+
+<div class="content">
+
+  <div class="sort">
+    <span class="sort-by big">SORT BY</span> <span class="pointer" (click)="sortByPrice()"><span class="little" onmousedown="return false">PRICE</span> <img src="img/{{sortedStatus == 'up' ? 'bottom.png' : 'top.png'}}" width="10" alt="arrow"></span>
+  </div>
+
+  <section *ngFor="let section of products;let i=index" [hidden]="!section[0].visibility">
+
+    <div class="with-line">
+      <div class="title big">{{section[0].section | uppercase}}</div>
+      <div class="line">
+       <div class="line-1"></div>
+     </div>
+   </div>
+
+   <div class="product-list">
+
+    <div class="swith">
+     <div class="little">{{section[0].qtyViewedSlides}} / {{section[0].qtyAllSlides}}</div>
+     <div class="middle"><span class="pointer" onmousedown="return false" (click)="prevSlide(section,i)" [ngStyle]= "getStylesPrev(section)"><</span> <span class="pointer" onmousedown="return false" (click)="nextSlide(section,i)" [ngStyle]= "getStylesNext(section)">></span></div>
+   </div>
+
+
+   <div class="product" *ngFor="let i=index;let product of section[1].products | slice:firstLimit:lastLimit">
+   
+     <div class="product-top">
+
+      <div class="size little" onmousedown="return false" *ngIf="product.params.size">SIZE</div>
+      <img class="pointer" src="img/{{product.params.showSize ? 'top.png' : 'bottom.png'}}" width="10" alt="arrow" onmousedown="return false" *ngIf="product.params.size" (click)="product.params.showSize = !product.params.showSize"> 
+
+      <div class="size-list" *ngIf="product.params.showSize">
+        <div class="little" *ngFor="let size of product.params.size">{{size | uppercase}}</div>
+      </div>
+
+      <div class="size little">{{product.params.description | uppercase}}</div>
+
+      <div class="color-list">
+       <div class="color" *ngFor="let color of product.colors"  [ngStyle]="{'background-color': color}"></div>
+
+     </div>
+   </div>
+   <div class="product-center">
+
+   <a routerLink="inner/{{product.id}}">
+     <img src="img/{{product.img}}" height="100%"  alt="shirt">
+   </a>
+     
+   </div>
+   <div class="product-bottom">
+     <div class="title middle">{{product.title | uppercase}}</div>
+     <div class="price big">{{product.price | number : '1.2-2'}}<span class="euro">&#8364;</span></div>
+   </div>
+
+ </div><!-- product -->
+
+
+</div>
+
+</section>
+
+</div>

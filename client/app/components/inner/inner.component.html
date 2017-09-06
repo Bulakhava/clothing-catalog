@@ -1,0 +1,55 @@
+<div class="options options-inner">
+	<a routerLink="/"><span class="arrow"><</span> <span class="middle">BACK TO CATALOG</span></a>
+</div>	
+
+<div class="content">
+
+	<div class="with-line with-line-inner">
+	<div class="title big left">{{product.title | uppercase}}</div>
+		<div class="line">
+			<div class="line-1"></div>
+		</div>
+	</div>
+
+	<div class="inner-item">
+		<div class="inner-item-pict">
+			<img src="img/{{product.img}}" width="100%" alt="{{product.title}}">
+		</div>
+		<div class="inner-item-description">
+			<div class="description">
+				<table>
+					<tbody>
+						<tr>
+							<td>{{product.price | number : '1.2-2'}}<span class="euro">&#8364;</span></td>
+							<td>PRICE</td>
+						</tr>
+						<tr *ngIf="product.colors.length">
+							<td class="color-list-box">
+								<div class="color-list">
+									<div class="color" *ngFor="let color of product.colors"  [ngStyle]="{'background-color': color}"></div>
+								</div>
+							</td>
+							<td>COLORS</td>
+						</tr>
+						<tr *ngIf="product.params.size">
+							<td>
+								<span class="size" *ngFor="let size of product.params.size">{{size | uppercase}}</span>
+								
+							</td>
+							<td>SIZES</td>
+						</tr>
+						<tr *ngIf="product.params.description">
+
+							<td>
+								<span>{{product.params.description | uppercase}}</span>
+							</td>
+							
+              <td>SIZES</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>
