@@ -19,6 +19,10 @@ app.get('/inner/:id', function(req, res, next){
 	res.render('index.html');
 });
 
+app.get('*',function(req, res, next){  
+    res.redirect('/');
+});
+
 app.listen(port, function(){
 	console.log('Server started on port ' + port);
 });
