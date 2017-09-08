@@ -29,11 +29,11 @@
 
     <div class="swith">
      <div class="little">{{section[0].qtyViewedSlides}} / {{section[0].qtyAllSlides}}</div>
-     <div class="middle"><span class="pointer" onmousedown="return false" (click)="prevSlide(section,i)" [ngStyle]= "getStylesPrev(section)"><</span> <span class="pointer" onmousedown="return false" (click)="nextSlide(section,i)" [ngStyle]= "getStylesNext(section)">></span></div>
+     <div class="middle"><span class="pointer" onmousedown="return false" (click)="prevSlide(section)" [ngStyle]= "getStylesPrev(section)"><</span> <span class="pointer" onmousedown="return false" (click)="nextSlide(section)" [ngStyle]= "getStylesNext(section)">></span></div>
    </div>
 
 
-   <div class="product" *ngFor="let i=index;let product of section[1].products | slice:firstLimit:lastLimit">
+   <div class="product" *ngFor="let product of section[1].products | slice:section[0].firstLimit:section[0].lastLimit">
    
      <div class="product-top">
 

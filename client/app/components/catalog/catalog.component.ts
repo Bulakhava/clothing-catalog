@@ -5,8 +5,8 @@ import {productList} from '../../services/data';
 @Component({
 	moduleId:module.id,
         selector: 'catalog', 
-	templateUrl: 'catalog.component.html'
-	
+        templateUrl: 'catalog.component.html'
+
 })
 
 export class CatalogComponent implements OnInit{
@@ -67,15 +67,13 @@ export class CatalogComponent implements OnInit{
 
 
         setDefault(){
+                
                 for(var i=0; i<this.products.length; i++){
-                        this.products[i][1].products = Object.assign([], this.productAll[this.products[i][1].products[0].section]);
                         this.products[i][0].firstLimit = 0;
                         this.products[i][0].lastLimit =this.products[i][0].firstLimit + this.numberOfVisible;
                         this.products[i][0].qtyViewedSlides = 1;
-                }  
+                } 
         }
-
-
 
         sortByPrice(){
 
@@ -86,7 +84,6 @@ export class CatalogComponent implements OnInit{
                                 });
                         }
                         this.sorted = true;
-                        
                         this.sortedStatus = 'down';
                         
                 }else{
@@ -105,45 +102,27 @@ export class CatalogComponent implements OnInit{
 
         }     
 
-        nextSlide(section,i){
 
-                if(this.products[i][0].qtyViewedSlides < this.products[i][0].qtyAllSlides){
+        nextSlide(section){
 
-                        let filter = [];
-                        let arr = this.productAll[section[1].products[0].section];
-                        for(let i=0;i<arr.length; i++){
-                                if(i>=section[0].lastLimit){
-                                        filter.push(arr[i]);
-                                }
-                        }
-                        this.products[i][1].products = filter;
-                        this.products[i][0].qtyViewedSlides++;
-                        this.products[i][0].firstLimit += this.numberOfVisible;
-                        this.products[i][0].lastLimit += this.numberOfVisible;
-                        this.slide = true;
+                if(section[0].qtyViewedSlides < section[0].qtyAllSlides){
+                        section[0].qtyViewedSlides++; 
+                        section[0].firstLimit += this.numberOfVisible;
+                        section[0].lastLimit += this.numberOfVisible;
+                        this.slide = true;  
                 }
 
-        }   
-
-
-        prevSlide(section,i){
-                if(this.products[i][0].qtyViewedSlides > 1){
-                        let filter = [];
-                        let arr = this.productAll[section[1].products[0].section];
-                        this.products[i][0].lastLimit -= this.numberOfVisible;
-                        this.products[i][0].firstLimit = this.products[i][0].lastLimit-  this.numberOfVisible;
-
-                        for(let i=0;i<arr.length; i++){
-                                if(i>=section[0].firstLimit){
-                                        filter.push(arr[i]);
-                                }
-                        }
-
-                        this.products[i][1].products = filter;
-                        this.products[i][0].qtyViewedSlides--;
-                        this.slide = true;
-                }   
         }
+
+        prevSlide(section){
+                if(section[0].qtyViewedSlides > 1){
+                        section[0].lastLimit -= this.numberOfVisible;
+                        section[0].firstLimit = section[0].lastLimit - this.numberOfVisible;
+                        section[0].qtyViewedSlides--;
+                        this.slide = true;    
+                }
+        }
+
 
         getStylesNext(section){
                 let myStyles = {

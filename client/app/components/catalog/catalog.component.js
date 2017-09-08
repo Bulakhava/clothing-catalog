@@ -57,7 +57,6 @@ var CatalogComponent = /** @class */ (function () {
     };
     CatalogComponent.prototype.setDefault = function () {
         for (var i = 0; i < this.products.length; i++) {
-            this.products[i][1].products = Object.assign([], this.productAll[this.products[i][1].products[0].section]);
             this.products[i][0].firstLimit = 0;
             this.products[i][0].lastLimit = this.products[i][0].firstLimit + this.numberOfVisible;
             this.products[i][0].qtyViewedSlides = 1;
@@ -85,35 +84,19 @@ var CatalogComponent = /** @class */ (function () {
             this.slide = false;
         }
     };
-    CatalogComponent.prototype.nextSlide = function (section, i) {
-        if (this.products[i][0].qtyViewedSlides < this.products[i][0].qtyAllSlides) {
-            var filter = [];
-            var arr = this.productAll[section[1].products[0].section];
-            for (var i_1 = 0; i_1 < arr.length; i_1++) {
-                if (i_1 >= section[0].lastLimit) {
-                    filter.push(arr[i_1]);
-                }
-            }
-            this.products[i][1].products = filter;
-            this.products[i][0].qtyViewedSlides++;
-            this.products[i][0].firstLimit += this.numberOfVisible;
-            this.products[i][0].lastLimit += this.numberOfVisible;
+    CatalogComponent.prototype.nextSlide = function (section) {
+        if (section[0].qtyViewedSlides < section[0].qtyAllSlides) {
+            section[0].qtyViewedSlides++;
+            section[0].firstLimit += this.numberOfVisible;
+            section[0].lastLimit += this.numberOfVisible;
             this.slide = true;
         }
     };
-    CatalogComponent.prototype.prevSlide = function (section, i) {
-        if (this.products[i][0].qtyViewedSlides > 1) {
-            var filter = [];
-            var arr = this.productAll[section[1].products[0].section];
-            this.products[i][0].lastLimit -= this.numberOfVisible;
-            this.products[i][0].firstLimit = this.products[i][0].lastLimit - this.numberOfVisible;
-            for (var i_2 = 0; i_2 < arr.length; i_2++) {
-                if (i_2 >= section[0].firstLimit) {
-                    filter.push(arr[i_2]);
-                }
-            }
-            this.products[i][1].products = filter;
-            this.products[i][0].qtyViewedSlides--;
+    CatalogComponent.prototype.prevSlide = function (section) {
+        if (section[0].qtyViewedSlides > 1) {
+            section[0].lastLimit -= this.numberOfVisible;
+            section[0].firstLimit = section[0].lastLimit - this.numberOfVisible;
+            section[0].qtyViewedSlides--;
             this.slide = true;
         }
     };
