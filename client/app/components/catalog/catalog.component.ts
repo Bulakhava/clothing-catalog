@@ -21,9 +21,6 @@ export class CatalogComponent implements OnInit{
         middleWidth:number = 940;
         windowWidth:number;
         numberOfVisible:number;
-        firstLimit:number = 0;
-        lastLimit:number;
-        limite:any = {};
         slide:any = false;
 
         renderPage(){
@@ -35,8 +32,6 @@ export class CatalogComponent implements OnInit{
                 }if(this.windowWidth < this.smallWidth){
                         this.numberOfVisible = 1;    
                 }
-
-                this.lastLimit = this.numberOfVisible;
 
                 for(var i=0; i<this.products.length; i++){
                         this.products[i][0].qtyViewedSlides = 1;
@@ -89,7 +84,6 @@ export class CatalogComponent implements OnInit{
                 }else{
                         for(var key in this.productAll){
                                 this.productAll[key].reverse();
-                                this.setDefault();
                                 this.sortedStatus == 'down' ? this.sortedStatus = 'up' : this.sortedStatus = 'down';
                         }  
 

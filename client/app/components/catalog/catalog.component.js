@@ -17,8 +17,6 @@ var CatalogComponent = /** @class */ (function () {
         this.sortedStatus = 'up';
         this.smallWidth = 740;
         this.middleWidth = 940;
-        this.firstLimit = 0;
-        this.limite = {};
         this.slide = false;
     }
     CatalogComponent.prototype.renderPage = function () {
@@ -32,7 +30,6 @@ var CatalogComponent = /** @class */ (function () {
         if (this.windowWidth < this.smallWidth) {
             this.numberOfVisible = 1;
         }
-        this.lastLimit = this.numberOfVisible;
         for (var i = 0; i < this.products.length; i++) {
             this.products[i][0].qtyViewedSlides = 1;
             this.products[i][0].qtyAllSlides = Math.ceil(this.products[i][1].products.length / this.numberOfVisible);
@@ -75,7 +72,6 @@ var CatalogComponent = /** @class */ (function () {
         else {
             for (var key in this.productAll) {
                 this.productAll[key].reverse();
-                this.setDefault();
                 this.sortedStatus == 'down' ? this.sortedStatus = 'up' : this.sortedStatus = 'down';
             }
         }
