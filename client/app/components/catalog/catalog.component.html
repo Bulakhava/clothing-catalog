@@ -6,7 +6,9 @@
         <label [attr.for]="box[0].section" onmousedown="return false">{{box[0].section | uppercase}}</label>
       </div>
     </div>
-    <button type="button" (click)="seeAllProducts()" *ngIf="button">SEE ALL PRODUCTS</button>
+    <div class="button">
+      <button type="button" (click)="seeAllProducts()" *ngIf="button">SEE ALL PRODUCTS</button>
+    </div>
   </form>
 </div><!--class="options"  -->
 
@@ -34,7 +36,7 @@
 
 
    <div class="product" *ngFor="let product of section[1].products | slice:section[0].firstLimit:section[0].lastLimit">
-   
+     
      <div class="product-top">
 
       <div class="size little" onmousedown="return false" *ngIf="product.params.size">SIZE</div>
@@ -53,9 +55,9 @@
    </div>
    <div class="product-center">
 
-   <a routerLink="inner/{{product.id}}">
-     <img src="img/{{product.img}}" height="100%"  alt="{{product.title}}">
-   </a>
+     <a routerLink="inner/{{product.id}}">
+       <img src="img/{{product.img}}" height="100%"  alt="{{product.title}}">
+     </a>
      
    </div>
    <div class="product-bottom">
